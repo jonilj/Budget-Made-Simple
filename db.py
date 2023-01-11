@@ -18,10 +18,10 @@ def resetPassword(hash,user_id):
 
 # Function to verify that username is not already in use in the database
 def checkUser(username):
-	con = sqlite3.connect("database.db")
-	cur = con.cursor()
-	user = cur.execute("SELECT * FROM users WHERE username = ?", [username])
-	return user.fetchone()
+    con = sqlite3.connect("database.db")
+    cur = con.cursor()
+    user = cur.execute("SELECT * FROM users WHERE username = ?", [username])
+    return user.fetchone()
 
 # Function to insert posts into the budget_history-table
 def insertBudgetH(user_id,category,amount,description,date):
