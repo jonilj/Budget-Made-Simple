@@ -20,18 +20,20 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+# Ensure responses aren't cached
 @app.after_request
 def after_request(response):
-    # Ensure responses aren't cached
     response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     response.headers["Expires"] = 0
     response.headers["Pragma"] = "no-cache"
     return response
 
+# Main app-route
 @app.route("/")
 def index():
     return render_template("index.html")
 
+# Gets the monthly budget overview
 @app.route("/budget_monthly", methods=["GET", "POST"])
 def budget_monthly():
     # List of categories that can be chosen
@@ -85,6 +87,7 @@ def budget_monthly():
     # Return the budget template
     return render_template("budget_monthly.html",categories=categories,budget=budget,totalAmount=totalAmount,showDelBt=showDelBt,months=months,monthSelected=monthSelected,currentYear=currentYear)
 
+# Budget-overview
 @app.route("/budget_overview", methods=["GET", "POST"])
 def budget():
     # Get current year for search in the database
@@ -136,7 +139,7 @@ def inputbudget():
            amount = re.sub('\D', '', amount)
 
         # Add minus sign if it's not a Income, Saving or Investment
-        if not request.form.get("category") in ("Income","Savings","Investmest"):
+        if not request.form.get("category") in ("Income","Savings","Investment"):
             amount = "-" + amount
 
         # Insert into budget_history-db and then redirect to /budget
@@ -153,12 +156,12 @@ def deletefrombudget():
         dbFunctions.deletefromBudgetH(int(session["user_id"]),int(request.form.get("delete")))
         return redirect("/budget_monthly")
 
-# Simply renders the about.html template
+# Renders the about.html template
 @app.route("/about")
 def about():
     return render_template("about.html")
 
-# Simply renders the myaccount.html template
+# Renders the myaccount.html template
 @app.route("/myaccount")
 @login_required
 def myaccount():
@@ -228,15 +231,15 @@ def signup():
             flash('Password must match.', 'errorFlash')
             return render_template("signup.html")
 
-        # Ensure password has a minimum of 8 characters, and contains atleast one numeral and one capital letter
+        # Ensure password has a minimum of 8 characters, and contains at least one numeral and one capital letter
         elif len(request.form.get("password")) < 8:
-            flash('Password must be atleast 8 characters.', 'errorFlash')
+            flash('Password must be at least 8 characters.', 'errorFlash')
             return render_template("signup.html")
         elif not any(char.isdigit() for char in request.form.get("password")):
-            flash('Password must contain atleast one numeral.', 'errorFlash')
+            flash('Password must contain at least one numeral.', 'errorFlash')
             return render_template("signup.html")
         elif not any(char.isupper() for char in request.form.get("password")):
-            flash('Password must contain atleast one uppcase character.', 'errorFlash')
+            flash('Password must contain at least one uppercase character.', 'errorFlash')
             return render_template("signup.html")
 
         # Else, register user in database
@@ -266,15 +269,15 @@ def resetpassword():
             flash('Passwords must match.', 'errorFlash')
             return render_template("resetpassword.html")
 
-        # Ensure password has a minimum of 8 characters, and contains atleast one numeral and one capital letter
+        # Ensure password has a minimum of 8 characters, and contains at least one numeral and one capital letter
         elif len(request.form.get("password")) < 8:
-            flash('Password must be atleast 8 characters.', 'errorFlash')
+            flash('Password must be at least 8 characters.', 'errorFlash')
             return render_template("resetpassword.html")
         elif not any(char.isdigit() for char in request.form.get("password")):
-            flash('Password must contain atleast one numeral.', 'errorFlash')
+            flash('Password must contain at least one numeral.', 'errorFlash')
             return render_template("resetpassword.html")
         elif not any(char.isupper() for char in request.form.get("password")):
-            flash('Password must contain atleast one uppcase character.', 'errorFlash')
+            flash('Password must contain at least one uppercase character.', 'errorFlash')
             return render_template("resetpassword.html")
 
         # Else, reset users password
