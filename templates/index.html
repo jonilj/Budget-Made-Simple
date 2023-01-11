@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+<div class="px-4 pt-7 my-4 text-center">
+  {% if session["user_id"] %}
+  <h2 class="display-4 fw-bold">Welcome back!</h2>
+  <div class="col-lg-6 my-2 mx-auto">
+    <p class="lead">What would you like to do today?</p>
+  </div>
+  {% else %}
+  <h2 class="display-4 fw-bold">Budgeting made easy</h2>
+  <div class="col-lg-6 my-2 mx-auto">
+    <p class="lead">Budget made simple lets you easily track your expenses, income and savings in <span class="lead-bold">one place.</span></p>
+  </div>
+  {% endif %}
+</div>
+
+<div class="container px-5 text-center">
+  {% if session["user_id"] %}
+  <div class="row g-4 py-2 row-cols-1 row-cols-lg-3 justify-content-center">
+    <div class="col">
+      <div class="card card-cover overflow-hidden text-white bg-dark rounded-5" id="card-bg-signup">
+        <div class="p-3 container-logged-in">
+          <h3 class="fs-2 me-3 index-header"><a href="/budget_monthly" class="text-decoration-none text-white">Edit your budget</a></h3>
+            <p>Add or remove new entries and see how you're doing this month.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-cover overflow-hidden text-white bg-dark rounded-5" id="card-bg-track">
+          <div class="p-3 container-logged-in">
+            <h3 class="fs-2 me-3 index-header"><a href="/budget_overview" class="text-decoration-none text-white">See your overview</a></h3>
+            <p>See how you're doing this year so far.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+  {% else %}
+  <div class="row g-4 py-2 row-cols-1 row-cols-lg-3">
+    <div class="col d-flex align-items-start">
+      <div class="card card-cover overflow-hidden text-white bg-dark rounded-5" id="card-bg-signup">
+        <div class="d-flex flex-column p-3">
+          <h3 class="fs-2 me-3 index-header"><a href="/signup" class="text-decoration-none text-white">Sign up</a></h3>
+            <p>Sign up now and use Budget Made Simple within a minute. Registering your account is really simple, and is completely free!</p>
+          </div>
+        </div>
+      </div>
+      <div class="col d-flex align-items-start">
+        <div class="card card-cover overflow-hidden text-white bg-dark rounded-5" id="card-bg-create">
+          <div class="d-flex flex-column p-3">
+            <h3 class="fs-2 me-3 index-header">Create and remove</h3>
+            <p>Budget Made Simple is just that - simple! You can easily add and remove entries to your budget using our simple interface.</p>
+          </div>
+        </div>
+      </div>
+    <div class="col d-flex align-items-start">
+      <div class="card card-cover overflow-hidden text-white bg-dark rounded-5" id="card-bg-track">
+        <div class="d-flex flex-column p-3">
+          <h3 class="fs-2 me-3 index-header">Track and adjust</h3>
+          <p>We provide a simple way of tracking your income and expenditures so you can see where your money is going. Adjust your spending as you go!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

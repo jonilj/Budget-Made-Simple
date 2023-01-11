@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Budget Overview
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+
+<!-- Here's the JavaScript generating the chart: https://developers.google.com/chart/interactive/docs/gallery/columnchart -->
+<script>
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    const data = google.visualization.arrayToDataTable([
+      {% for key, value in budgetPie.items() %}
+        {% if value is string %}
+          ['{{ key }}', '{{ value }}'],
+        {% else %}
+          ['{{ key }}', {{ value }}],
+        {% endif %}
+      {% endfor %}
+    ]);
+
+    const options = {
+      is3D: false,
+      legend: 'none',
+      width: 800,
+      height: 400,
+      chartArea: {left:50,top:5,right:5,bottom:50,width:"80%",height:"80%"}
+    };
+
+    const chart = new google.visualization.ColumnChart(document.getElementById('budgetPieChart'));
+    chart.draw(data, options);
+  }
+</script>
+<!-- JavaScript ends here -->
+
+<div class="container col-xl-8 col-xxl-18 px-0 py-4">
+  <h1 class="display-5 fw-bold center-text">Budget overview</h1>
+  <p class="lead mb-4">Here is an overview of your budget so far for {{ currentYear }}.</p>
+  	<div class="row">
+      <div id="budgetPieChart" class="col-auto">
+        </div>
+      <div class="col-sm text-center">
+        <div class="col">
+          <h3>Your total balance for the year is:</h3><h4>{{ totalBalance|default('No data available') }}</h4>
+        </div>
+        <div class="col">
+          <h3>Your total expenses for the year are:</h3><h4>{{ totalExpenses|default('No data available') }}</h4>
+        </div>
+        <div class="col">
+          <h3>Most of your expenses have been in this category:</h3><h4>{{ highestCategory|default('No data available') }}</h4>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

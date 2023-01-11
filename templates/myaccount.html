@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Account
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+<div class="container text-center py-4">
+  <h1 class="display-5 fw-bold center-text pb-4">My Account</h1>
+  <div class="row row-col-1 row-cols-md-2 mb-2">
+    <div class="col">
+      <div class="card rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Delete account</h4>
+        </div>
+        <div class="card-body">
+          <p><strong>Warning:</strong> Deleting your account will result in all your data being deleted.</p>
+          <div class="form-floating mb-2 py-2">
+            <form action="/deleteaccount" method="POST" onsubmit="return confirm('Are you sure you wish to delete your account? You will lose any data and there is no going back.');">
+              <button class="w-35 btn btn-lg btn-danger" type="submit">Delete Account</button>
+            </form>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">Change password</h4>
+        </div>
+        <div class="card-body">
+          <p>If you want to change your password, please click the button below.</p>
+          <div class="form-floating mb-2 py-2">
+            <a class="w-35 btn btn-lg btn-primary nav-link-button" href="/resetpassword">Change Password</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Welcome!
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+<div class="container col-xl-10 col-xxl-8 px-4 py-1">
+    <div class="row align-items-center g-lg-5 py-5">
+      <div class="col-lg-7 text-center text-lg-start">
+        <h1 class="display-3 fw-bold lh-1 mb-3">Sign up for free to get in control of your money today</h1>
+        <p class="already lead fs-4">...or if you already have an account you can <a href="/login">sign in here.</a></p>
+      </div>
+      <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" action="/signup" method="POST">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control" name="username" id="username" placeholder="name@example.com">
+            <label for="username">Email address</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="password" id="inputPassword5" placeholder="Password">
+            <label for="password">Password</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control" name="confirmpassword" id="inputPassword5" placeholder="Confirm Password">
+            <label for="confirmpassword">Confirm password</label>
+          </div>
+          <button class="w-100 btn btn btn-primary" type="submit">Sign up</button>
+          <hr class="my-4">
+          <div class="text-center">
+            <small class="text-muted text-center">By clicking Sign up, you agree to the terms of use.</small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

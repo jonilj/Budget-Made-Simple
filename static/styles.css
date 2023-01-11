@@ -1,0 +1,156 @@
+/* Background color */
+body    {
+    background-color: white;
+    height: 100%;
+    flex: 1 0 auto;
+}
+
+/* Navbar styling */
+nav
+{
+    padding: 0px 200px 0px 200px;
+}
+
+.navbar {
+    background-color: #025;
+}
+
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand in navbar */
+nav .navbar-brand .primary
+{
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+}
+
+nav .navbar-brand .secondary
+{
+    color: red;
+    font-style: italic;
+}
+
+/* Styling for links in navbar */
+nav .nav-link, .nav-link-button
+{
+    color: white;
+}
+
+nav .nav-link:hover
+{
+    color: grey;
+}
+
+nav .nav-item
+{
+    font-family: "Inter";
+    padding-left: 30px;
+}
+
+/* Special styling for the cards on the Index-page */
+#card-bg-signup {
+    background-image: url('../static/img/signup_unsplash.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#card-bg-create {
+    background-image: url('../static/img/create_unsplash.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#card-bg-track {
+    background-image: url('../static/img/track_unsplash.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container-logged-in {
+    height: 130px;
+}
+
+/* Main content containers */
+h3.index-header {
+    font-style: italic;
+    text-decoration: underline;
+}
+
+h4 {
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+.top-container {
+    margin-top: 100px;
+}
+
+/* 404 styling */
+.errorimg {
+    max-width: 30%;
+    margin-top: 30px;
+}
+
+/* Extra styling for sign up page */
+.already {
+    padding-top: 15px;
+}
+
+.text-start {
+    color: black;
+}
+
+/* Extra styling for index page */
+.lead-bold {
+    font-weight: 600;
+    font-style: underline;
+}
+
+/* Input budget and styling */
+.amount, .input-budget-label, .budget-input {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.infotext {
+    font-style: italic;
+}
+
+/* Styling for the About-page */
+.about-p {
+    font-family: "Inter";
+}
+
+/* Flash-message styling */
+.errorFlash {
+    background-color: #DC3545;
+    text-align: center;
+}
+
+.infoFlash {
+    background-color: #50C878;
+    text-align: center;
+}
+
+.flashHeader {
+    padding: 8px 0px 8px 0px;
+    color: white;
+}
+
+/* Hide the arrows in the amount box
+Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* -||- Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

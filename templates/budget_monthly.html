@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Monthly Budget
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+<div class="container col-xl-8 col-xxl-18 px-0 py-4">
+  <h1 class="display-5 fw-bold center-text">Entries for {{ monthSelected }}, {{ currentYear }}</h1>
+    <label for="monthSelected" class="input-budget-label">Select month:</label>
+      <form action="/budget_monthly" method="POST">
+        <select name="monthSelected" onChange="this.form.submit()">
+          <option value="{{ monthSelected }}" selected>{{ monthSelected }}</option>
+            {% for month in months %}
+              <option value="{{ month }}">{{ month }}</option>"
+            {% endfor %}
+        </select>
+      </form>
+
+  <!-- Start of table -->
+  <div class="row">
+    <div class="col">
+      <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Delete</th>
+                <th scope="col">Date</th>
+                <th scope="col">Category</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for entry in budget %}
+                    <tr>
+                        <td scope="row">
+                          {% if showDelBt %}
+                          <form action="/deletefrombudget" method="POST" onsubmit="return confirm('Are you sure you wish to delete this entry?');">
+                            <input type="hidden" name="delete" value="{{ entry[0] }}">
+                            <button class="btn btn-danger btn-sm px-2 me-sm-2" type="submit">Delete</button>
+                          </form>
+                          {% endif %}
+                        </td>
+                        <td scope="row">{{ entry[4]|default('No data available') }}</td>
+                        <td scope="row">{{ entry[1]|default('No data available') }}</td>
+                        <td scope="row">{{ entry[3]|default('No data available') }}</td>
+                        <td scope="row">{{ entry[2]|default('No data available') }}</td>
+                    </tr>
+                {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td scope="col" class="border-0"></td>
+                <td scope="col" class="border-0"></td>
+                <td scope="col" class="border-0"></td>
+                <td scope="col" class="border-0 fw-bold">Total:</td>
+                <td scope="col" class="border-0 fw-bold">{{ totalAmount }}</td>
+            </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- Form to input budget posts -->
+    <div class="col col-lg-2">
+
+    <!-- Form and selector for how to show the budget -->
+      <form class="p-4 p-md-7 border rounded-3 bg-light" action="/inputbudget" method="POST">
+        <div class="form-floating mb-3">
+          <div class="form-group">
+            <label for="amount" class="input-budget-label">Amount*</label>
+            <input type="number" class="form-control budget-input" name="amount" id="amount" autocomplete="off" autofocus>
+            <label for="description" class="input-budget-label">Description</label>
+            <input type="text" class="form-control budget-input" name="description" id="description" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="category" class="input-budget-label">Category*</label>
+            {% if errorCategory %}
+              <p class="error-message">{{ errorCategory }}</p>
+            {% endif %}
+            <select name="category">
+              <option value="{{ categories[0] }}" selected>{{ categories[0] }}</option>
+                {% for category in categories[1:] %}
+                  <option value="{{ category }}">{{ category }}</option>"
+                {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+      </form>
+      <div class="d-grid gap-2">
+        <small class="infotext mt-2 text-muted">Input amount and select category, then click Add to add your entry to the table.</small>
+        <small class="infotext mt-2 text-muted">Description is optional.</small>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

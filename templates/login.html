@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+<header>
+</header>
+
+<!-- Main content goes here -->
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="col-md-10 mx-auto col-lg-5">
+        <form class="p-4 p-md-5 border rounded-3 bg-light" action="/login" method="POST">
+            <div class="text-center">
+                <h4>Sign in to your account</h4>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" name="username" id="username" autocomplete="off" placeholder="name@example.com" autofocus>
+                <label for="username">Email address</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password" id="inputPassword5" placeholder="Password">
+                <label for="password">Password</label>
+            </div>
+            <button class="w-100 btn btn btn-primary" type="submit">Login</button>
+            <hr class="my-4">
+            <div class="text-center">
+                <small class="text-muted">Login using your username and password, or <a href="/signup">sign up</a> first.</small>
+            </div>
+        </form>
+      </div>
+</div>
+{% endblock %}
